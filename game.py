@@ -10,7 +10,7 @@
 import time as t 
 import random
 
-class Class:
+class Characters:
         def __init__(self, name, atk, hp, max_hp, special):
             self.name = name
             self.atk = atk
@@ -18,6 +18,15 @@ class Class:
             self.max_hp = max_hp
             self.special = special
 
+# Characters (will make function later)
+
+# playable
+Warrior = Characters("Warrior", 3, 20, 20, "Blade Dance")
+Mage = Characters("Mage", 7, 5, 5, "Magic Burst")
+Archer = Characters("Archer", 5, 10, 10, "Triple Shot")
+
+# npc
+Knight = Characters("Knight", 8, 10, 10, "Slash")
 
 
 
@@ -38,9 +47,6 @@ knight_img = r"""
       <\\\)     (///>
 
 """
-
-
-
 
 crawl = r"""
    _________________________________________________________
@@ -63,13 +69,7 @@ crawl = r"""
  /                                             _ -           \
 /   -_- _ -             _- _---                       -_-  -_ \
 
-
 """
-
-def main():
-    player_name = intro(crawl)
-    player_class = cls_selection(player_name)
-    play_game = game(player_class)
 
 def intro(crawl):
     
@@ -86,10 +86,6 @@ def intro(crawl):
 
 def cls_selection(name):
 
-    Warrior = Class("Warrior", 3, 20, 20, "Blade Dance")
-    Mage = Class("Mage", 7, 5, 5, "Magic Burst")
-    Archer = Class("Archer", 5, 10, 10, "Triple Shot")
-
     for i, cls in enumerate([Warrior, Mage, Archer], start=1):
 
         # Display options
@@ -100,7 +96,6 @@ def cls_selection(name):
         print("\n")
 
     option = int(input(f"{name}... Choose your class: (1-3) \n"))
-
 
     # prints in if statement are for testing purposes only.
     if option == 1:
@@ -119,8 +114,6 @@ def cls_selection(name):
     return option
 
 def game(play_game):
-
-    Knight = Class("Knight", 8, 10, 10, "Slash")
 
     for line in knight_img.splitlines():
         print(line)
@@ -156,9 +149,6 @@ def game(play_game):
 
         elif option == 2: 
 
-            # fix max hp is not 20 for all classes.
-            # this is a temporary fix for the heal amount.
-
             if play_game.hp >= play_game.max_hp:
                 print(f"You cannot do this now. You are at max HP.\n")
 
@@ -174,7 +164,6 @@ def game(play_game):
                 print(f"{heal_amount} heal amount lol")
 
                 play_game.hp += heal_amount # update player HP
-
 
                 print(f"{play_game.name} has healed for {heal_amount}\n")
                 print(f"{play_game.name} HP: {play_game.hp}\n")
@@ -204,14 +193,12 @@ def game(play_game):
         elif damage > 0:
             print(f"{Knight.name} hit for {damage} damage.\n")
             print(f"{play_game.name} HP: {play_game.hp}\n")
-        
-        
-    
-    
 
 
-
-
+def main():
+    player_name = intro(crawl)
+    player_class = cls_selection(player_name)
+    play_game = game(player_class)
 
 
 
